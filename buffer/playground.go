@@ -10,6 +10,7 @@ type DataPlayground interface {
 type Float32DataPlayground interface {
 	DataPlayground
 	PutFloat32(index int, value float32)
+	Count() int
 }
 
 func DedicatedFloat32DataPlayground(count int) Float32DataPlayground {
@@ -38,6 +39,10 @@ func (p *float32DataPlayground) PutFloat32(index int, value float32) {
 	p.data[index*4+3] = byte(bits >> 24)
 }
 
+func (p *float32DataPlayground) Count() int {
+	return len(p.data) / 4
+}
+
 type Float32DataWriter interface {
 	PutValue(value float32)
 	PutValue2(a, b float32)
@@ -45,10 +50,10 @@ type Float32DataWriter interface {
 	PutValue4(a, b, c, d float32)
 }
 
-func NewFloat32DataWriter(playground Float32DataPlayground, stride int) Float32DataWriter {
+func NewFloat32DataWriter(playground Float32DataPlayground, offset, stride int) Float32DataWriter {
 	return &float32DataWriter{
 		playground: playground,
-		offset:     0,
+		offset:     offset,
 		stride:     stride,
 	}
 }
@@ -88,6 +93,7 @@ func (w *float32DataWriter) PutValue4(a, b, c, d float32) {
 type UInt16DataPlayground interface {
 	DataPlayground
 	PutUInt16(index int, value uint16)
+	Count() int
 }
 
 func DedicatedUInt16DataPlayground(count int) UInt16DataPlayground {
@@ -111,6 +117,10 @@ func (p *uint16DataPlayground) Data() []byte {
 func (p *uint16DataPlayground) PutUInt16(index int, value uint16) {
 	p.data[index*2+0] = byte(value)
 	p.data[index*2+1] = byte(value >> 8)
+}
+
+func (p *uint16DataPlayground) Count() int {
+	return len(p.data) / 2
 }
 
 type UInt16DataWriter interface {
