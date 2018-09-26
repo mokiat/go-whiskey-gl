@@ -3,7 +3,7 @@ package shader
 import (
 	"errors"
 
-	"github.com/go-gl/gl/v2.1/gl"
+	"github.com/go-gl/gl/v3.2-core/gl"
 )
 
 type VertexShader struct {

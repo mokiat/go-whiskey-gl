@@ -1,6 +1,6 @@
 package texture
 
-import "github.com/go-gl/gl/v2.1/gl"
+import "github.com/go-gl/gl/v3.2-core/gl"
 
 type FlatTexture struct {
 	Texture
@@ -14,7 +14,7 @@ func (t *FlatTexture) Allocate() error {
 	if err := t.Texture.Allocate(); err != nil {
 		return err
 	}
-	t.Bind() // assure we specify 2d dimension
+	t.Bind()
 	// TODO: Make configurable
 	gl.TexParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT)
 	gl.TexParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT)
