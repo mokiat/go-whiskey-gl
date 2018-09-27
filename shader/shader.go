@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/go-gl/gl/v3.2-core/gl"
+	"github.com/go-gl/gl/v4.1-core/gl"
+	"github.com/mokiat/go-whiskey/logging"
 )
 
 const InvalidID = 0
@@ -28,6 +29,7 @@ func (s *Shader) SetSourceCode(source string) {
 }
 
 func (s *Shader) Compile() error {
+	logging.Printf("compiling shader (id: %d)", s.ID)
 	gl.CompileShader(s.ID)
 
 	if s.getCompileStatus() == gl.FALSE {

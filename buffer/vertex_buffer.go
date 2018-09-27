@@ -1,6 +1,9 @@
 package buffer
 
-import "github.com/go-gl/gl/v3.2-core/gl"
+import (
+	"github.com/go-gl/gl/v4.1-core/gl"
+	"github.com/mokiat/go-whiskey/logging"
+)
 
 type VertexBuffer struct {
 	Buffer
@@ -17,5 +20,6 @@ func (b *VertexBuffer) Bind() {
 }
 
 func (b *VertexBuffer) CreateData(playground DataPlayground) {
+	logging.Printf("creating vertex buffer data (size: %d)", playground.Size())
 	gl.BufferData(gl.ARRAY_BUFFER, playground.Size(), gl.Ptr(playground.Data()), gl.STATIC_DRAW)
 }

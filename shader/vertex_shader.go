@@ -3,7 +3,8 @@ package shader
 import (
 	"errors"
 
-	"github.com/go-gl/gl/v3.2-core/gl"
+	"github.com/go-gl/gl/v4.1-core/gl"
+	"github.com/mokiat/go-whiskey/logging"
 )
 
 type VertexShader struct {
@@ -21,5 +22,6 @@ func (s *VertexShader) Allocate() error {
 	if s.ID == InvalidID {
 		return errors.New("Failed to allocate shader!")
 	}
+	logging.Printf("vertex shader allocated (id: %d)", s.ID)
 	return nil
 }

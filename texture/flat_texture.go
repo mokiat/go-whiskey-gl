@@ -1,6 +1,9 @@
 package texture
 
-import "github.com/go-gl/gl/v3.2-core/gl"
+import (
+	"github.com/go-gl/gl/v4.1-core/gl"
+	"github.com/mokiat/go-whiskey/logging"
+)
 
 type FlatTexture struct {
 	Texture
@@ -28,6 +31,8 @@ func (t *FlatTexture) Bind() {
 }
 
 func (t *FlatTexture) CreateData(playground FlatDataPlayground) {
+	logging.Printf("creating flat texture data (width: %d, height: %d)", playground.Width(), playground.Height())
+
 	gl.PixelStorei(gl.UNPACK_ALIGNMENT, 1)
 	gl.TexImage2D(
 		gl.TEXTURE_2D,

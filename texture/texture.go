@@ -3,7 +3,8 @@ package texture
 import (
 	"errors"
 
-	"github.com/go-gl/gl/v3.2-core/gl"
+	"github.com/go-gl/gl/v4.1-core/gl"
+	"github.com/mokiat/go-whiskey/logging"
 )
 
 const InvalidID = 0
@@ -23,6 +24,7 @@ func (t *Texture) Allocate() error {
 	if t.ID == InvalidID {
 		return errors.New("Failed to allocate texture!")
 	}
+	logging.Printf("texture allocated (id: %d)", t.ID)
 	return nil
 }
 

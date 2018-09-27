@@ -1,6 +1,9 @@
 package texture
 
-import "github.com/go-gl/gl/v3.2-core/gl"
+import (
+	"github.com/go-gl/gl/v4.1-core/gl"
+	"github.com/mokiat/go-whiskey/logging"
+)
 
 type CubeTexture struct {
 	Texture
@@ -29,7 +32,7 @@ func (t *CubeTexture) Bind() {
 }
 
 func (t *CubeTexture) CreateData(playground CubeDataPlayground) {
-	gl.PixelStorei(gl.UNPACK_ALIGNMENT, 1)
+	logging.Printf("creating cube texture data (side: %d)", playground.Size())
 
 	setImage := func(target uint32, side CubeSide) {
 		imgData := playground.Data(side)
@@ -45,6 +48,7 @@ func (t *CubeTexture) CreateData(playground CubeDataPlayground) {
 			gl.Ptr(imgData),
 		)
 	}
+	gl.PixelStorei(gl.UNPACK_ALIGNMENT, 1)
 	setImage(gl.TEXTURE_CUBE_MAP_POSITIVE_X, CubeSideRight)
 	setImage(gl.TEXTURE_CUBE_MAP_NEGATIVE_X, CubeSideLeft)
 	setImage(gl.TEXTURE_CUBE_MAP_POSITIVE_Z, CubeSideFront)
